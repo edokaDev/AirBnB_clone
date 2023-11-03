@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""class BaseModel that defines all common attributes/methods for other classes"""
+"""Parent class BaseModel that defines all attributes for other classes"""
 from datetime import datetime
 import uuid
 import models
@@ -23,10 +23,10 @@ class BaseModel:
 
     def __str__(self):
         """Returns a string representantion of the object"""
-        return "[{}] ({}) <{}>".format(self.__class__.__name__, self.id, self.__dict__)
+        return f"[{self.__class__.__name__}] ({self.id}) <{self.__dict__}>"
 
     def save(self):
-        """Updates the public instance attribute updated_at with the current datetime"""
+        """Updates updated_at attribute with the current datetime"""
         self.updated_at = datetime.now()
         models.storage.new(self)
         models.storage.save()
@@ -36,5 +36,5 @@ class BaseModel:
         dictionary = self.__dict__.copy()
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
-        dictionary.update({"__class__":self.__class__.__name__})
+        dictionary.update({"__class__": self.__class__.__name__})
         return dictionary
