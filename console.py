@@ -14,7 +14,8 @@ import models
 
 class HBNBCommand(cmd.Cmd):
     """All methods and attributes that will be used in the command line."""
-    class_list = ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]
+    class_list = ["BaseModel", "User", "Place", "State",
+                  "City", "Amenity", "Review"]
 
     def do_quit(self, line):
         """Exits the command line session."""

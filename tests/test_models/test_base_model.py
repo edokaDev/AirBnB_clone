@@ -20,7 +20,8 @@ class TestBaseModel(unittest.TestCase):
 
     def test_str(self):
         """Checks the __str__ method."""
-        string = f"[{self.obj.__class__.__name__}] ({self.obj.id}) <{self.obj.__dict__}>"
+        class_name = self.obj.__class__.__name__
+        string = f"[{class_name}] ({self.obj.id}) <{self.obj.__dict__}>"
         self.assertAlmostEqual(self.obj.__str__(), string)
 
     def test_to_dict(self):

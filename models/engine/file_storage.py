@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Serializes instances to a JSON file and deserializes JSON file to instances."""
+"""Serializes and deserializes instances to and from a JSON file."""
 import json
 from models.base_model import BaseModel
 
@@ -23,7 +23,7 @@ class FileStorage:
         """
         class_name = '.'.join((type(obj).__name__, obj.id))
         obj_dict = obj.to_dict()
-        FileStorage.__objects.update({class_name: obj_dict}) #adds the new object to dictonary
+        FileStorage.__objects.update({class_name: obj_dict})
 
     def save(self):
         """Serializes inject to json string and saves them
