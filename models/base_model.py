@@ -10,7 +10,7 @@ class BaseModel:
     def __init__(self, *args, **kwargs):
         """Instatiates attributes when an object is made."""
         if kwargs:
-            self.id = kwargs['id']
+            self.__dict__.update(kwargs)
             self.created_at = datetime.fromisoformat(kwargs['created_at'])
             self.updated_at = datetime.fromisoformat(kwargs['updated_at'])
         else:
