@@ -1,6 +1,7 @@
 """A cmd-line interpreter to handle creation and deletion of objects."""
 import cmd
 import json
+from models.base_model import BaseModel
 import models
 
 
@@ -25,18 +26,20 @@ class HBNBCommand(cmd.Cmd):
         """Creates an new instance of BaseModel,
         saves it to a json file and prints id.
         """
-        class_list = ["BaseModel", "FileStorage"]
+        class_list = ["BaseModel"]
         if not line:
             print("** class name missing **")
             return
 
-        elif line not in class_list:
+        if line not in class_list:
             print("** class doesn't exist **")
             return
-
-        new_object = models.base_model.BaseModel()
-        new_object.save()
-        print(new_object.id)
+        if line in globals() and isinstance(globals()[line], type):
+            new_object = globals()[line]()
+            print(new_object.id)
+            new_object.save()
+        else:
+            print("** class doesn't exist **")
 
     def do_show(self, line):
         """Prints the string representation of an instance
@@ -56,7 +59,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
-        key = args[0] + '.' + args[1]
+        key = '.'.join((args[0], args[1]))
 
         with open('storage_file.json', 'r', encoding='utf-8') as f:
             objs_dict = json.load(f)
@@ -65,7 +68,6 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found ** ")
         else:
             obj_dict = objs_dict[key]
-            print(obj_dict)
             obj = models.base_model.BaseModel(**obj_dict)
             print(obj)
 
@@ -87,7 +89,7 @@ class HBNBCommand(cmd.Cmd):
             print("** instance id missing **")
             return
 
-        key = args[0] + '.' + args[1]
+        key = '.'.join((args[0], args[1]))
 
         with open('storage_file.json', 'r', encoding='utf-8') as f:
             objs_dict = json.load(f)
@@ -150,7 +152,7 @@ class HBNBCommand(cmd.Cmd):
         if argc < 1:
             print("** class name missing **")
             return
-        elif args[0] not in class_list:
+        if args[0] not in class_list:
             print("** class doesn't exist **")
             return
 
@@ -160,7 +162,8 @@ class HBNBCommand(cmd.Cmd):
 
         with open('storage_file.json', 'r', encoding='utf-8') as f:
             objs_dict = json.load(f)
-        key = args[0] + '.' + args[1]
+
+        key = '.'.join((args[0], args[1]))
 
         keys_list = objs_dict.keys()
 
@@ -175,9 +178,9 @@ class HBNBCommand(cmd.Cmd):
         if argc < 4:
             print("** value missing **")
             return
-        
+
         obj_dict = objs_dict[key]
-        string = args[3].strip("'").strip('"')
+        string = args[3].strip('\'\"')
         obj_spawn = models.base_model.BaseModel(**obj_dict)
         args[2] = args[2].strip('"').strip("'")
         if args[2] in obj_dict.keys():
@@ -186,7 +189,7 @@ class HBNBCommand(cmd.Cmd):
             setattr(obj_spawn, args[2], string)
         else:
             setattr(obj_spawn, args[2], string)
-        
+
         with open('storage_file.json', 'r+', encoding='utf-8') as f:
             old_copy = json.load(f)
             f.seek(0)
@@ -196,6 +199,7 @@ class HBNBCommand(cmd.Cmd):
             f.write(new_copy)
         models.storage.reload()
         obj_spawn.save()
+
 
 if __name__ == "__main__":
     HBNBCommand().cmdloop()
