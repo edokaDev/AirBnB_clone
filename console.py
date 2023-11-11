@@ -3,12 +3,17 @@ import cmd
 import json
 from models.base_model import BaseModel
 from models.user import User
+from models.place import Place
+from models.city import City
+from models.amenity import Amenity
+from models.review import Review
+from models.state import State
 import models
 
 
 class HBNBCommand(cmd.Cmd):
     """All methods and attributes that will be used in the command line."""
-    class_list = ["BaseModel", "User"]
+    class_list = ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]
 
     def do_quit(self, line):
         """Exits the command line session."""
@@ -127,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
                 if args[0] in key:
                     obj_dict = objs_dict[key]
                     obj_spawn = globals()[args[0]](**obj_dict)
-                    string = obj_spawn.__dict__
+                    string = obj_spawn.__str__()
                     string_list.append(string)
             elif argc == 0:
                 obj_dict = objs_dict[key]

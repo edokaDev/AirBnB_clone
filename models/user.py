@@ -1,5 +1,4 @@
 """Used to represent a user."""
-from datetime import datetime
 from models.base_model import BaseModel
 
 
