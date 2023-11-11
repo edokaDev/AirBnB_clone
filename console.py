@@ -2,11 +2,13 @@
 import cmd
 import json
 from models.base_model import BaseModel
+from models.user import User
 import models
 
 
 class HBNBCommand(cmd.Cmd):
     """All methods and attributes that will be used in the command line."""
+    class_list = ["BaseModel", "User"]
 
     def do_quit(self, line):
         """Exits the command line session."""
@@ -26,12 +28,11 @@ class HBNBCommand(cmd.Cmd):
         """Creates an new instance of BaseModel,
         saves it to a json file and prints id.
         """
-        class_list = ["BaseModel"]
         if not line:
             print("** class name missing **")
             return
 
-        if line not in class_list:
+        if line not in HBNBCommand.class_list:
             print("** class doesn't exist **")
             return
         if line in globals() and isinstance(globals()[line], type):
@@ -51,7 +52,7 @@ class HBNBCommand(cmd.Cmd):
 
         args = line.split()
 
-        if args[0] not in ["BaseModel"]:
+        if args[0] not in HBNBCommand.class_list:
             print("** class doesn't exist **")
             return
 
@@ -68,7 +69,7 @@ class HBNBCommand(cmd.Cmd):
             print("** no instance found ** ")
         else:
             obj_dict = objs_dict[key]
-            obj = models.base_model.BaseModel(**obj_dict)
+            obj = globals()[args[0]](**obj_dict)
             print(obj)
 
     def do_destroy(self, line):
@@ -81,7 +82,7 @@ class HBNBCommand(cmd.Cmd):
 
         args = line.split()
 
-        if args[0] not in ["BaseModel"]:
+        if args[0] not in HBNBCommand.class_list:
             print("** class doesn't exist **")
             return
 
@@ -109,13 +110,12 @@ class HBNBCommand(cmd.Cmd):
         Usage: all
                all ClassName
         """
-        class_list = ["BaseModel"]
         args = line.split()
         argc = len(args)
         string_list = []
 
         if argc == 1:
-            if args[0] not in class_list:
+            if args[0] not in HBNBCommand.class_list:
                 print("** class doesn't exist **")
                 return
 
@@ -126,12 +126,12 @@ class HBNBCommand(cmd.Cmd):
             if argc == 1:
                 if args[0] in key:
                     obj_dict = objs_dict[key]
-                    obj_spawn = models.base_model.BaseModel(**obj_dict)
+                    obj_spawn = globals()[args[0]](**obj_dict)
                     string = obj_spawn.__dict__
                     string_list.append(string)
             elif argc == 0:
                 obj_dict = objs_dict[key]
-                obj_spawn = models.base_model.BaseModel(**obj_dict)
+                obj_spawn = globals()[obj_dict['__class__']](**obj_dict)
                 string = obj_spawn.__str__()
                 string_list.append(string)
 
@@ -145,14 +145,13 @@ class HBNBCommand(cmd.Cmd):
         modifying an attribute.
         Usage: update <class name> <id> <attribute name> "<attribute value>"
         """
-        class_list = ["BaseModel"]
         args = line.split()
         argc = len(args)
 
         if argc < 1:
             print("** class name missing **")
             return
-        if args[0] not in class_list:
+        if args[0] not in HBNBCommand.class_list:
             print("** class doesn't exist **")
             return
 
@@ -181,7 +180,7 @@ class HBNBCommand(cmd.Cmd):
 
         obj_dict = objs_dict[key]
         string = args[3].strip('\'\"')
-        obj_spawn = models.base_model.BaseModel(**obj_dict)
+        obj_spawn = globals()[args[0]](**obj_dict)
         args[2] = args[2].strip('"').strip("'")
         if args[2] in obj_dict.keys():
             prev_value = getattr(obj_spawn, args[2])

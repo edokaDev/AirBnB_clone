@@ -20,11 +20,8 @@ class FileStorage:
         """Sets the key of the obj for the __objects dictionary.
         The format used is class_name.id
         """
-        class_name = type(obj).__name__ + '.' + obj.id
+        class_name = '.'.join((type(obj).__name__, obj.id))
         obj_dict = obj.to_dict()
-        #if class_name in FileStorage.__objects.keys():
-            #FileStorage.__objects[class_name] = obj_dict
-        #else:
         FileStorage.__objects.update({class_name: obj_dict}) #adds the new object to dictonary
 
     def save(self):
