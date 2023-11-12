@@ -14,6 +14,7 @@ import models
 
 class HBNBCommand(cmd.Cmd):
     """All methods and attributes that will be used in the command line."""
+    prompt = '(hbnb) '
     class_list = ["BaseModel", "User", "Place", "State",
                   "City", "Amenity", "Review"]
 
