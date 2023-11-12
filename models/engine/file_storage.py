@@ -48,7 +48,7 @@ class FileStorage:
             save[obj] = FileStorage.__objects[obj].to_dict()
 
         # json_string = json.dumps(FileStorage.__objects)
-        json_string = json.dumps(save, indent=4)
+        json_string = json.dumps(save)
 
         with open(FileStorage.__file_path, 'w', encoding='utf-8') as f:
             f.write(json_string)
