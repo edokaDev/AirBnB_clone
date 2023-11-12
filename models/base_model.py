@@ -1,15 +1,16 @@
 #!/usr/bin/python3
-"""Parent class BaseModel that defines all attributes for other classes"""
+"""Parent class BaseModel that defines all attributes for other classes."""
+
 from datetime import datetime
 import uuid
 import models
 
 
 class BaseModel:
-    """The parent for all the other subclasses to follow."""
+    """Parent for all the other subclasses to follow."""
 
     def __init__(self, *args, **kwargs):
-        """Initializes attributes when an object is made."""
+        """Initialize attributes when an object is made."""
         if kwargs:
             del kwargs['__class__']
             self.__dict__.update(kwargs)
@@ -22,17 +23,17 @@ class BaseModel:
             models.storage.new(self)
 
     def __str__(self):
-        """Returns a string representantion of the object"""
+        """Return a string representantion of the object."""
         return f"[{self.__class__.__name__}] ({self.id}) {self.__dict__}"
 
     def save(self):
-        """Updates updated_at attribute with the current datetime"""
+        """Update updated_at attribute with the current datetime."""
         self.updated_at = datetime.now()
         models.storage.new(self)
         models.storage.save()
 
     def to_dict(self):
-        """Returns a dictionary representation of the object."""
+        """Return a dictionary representation of the object."""
         dictionary = self.__dict__.copy()
         dictionary['created_at'] = self.created_at.isoformat()
         dictionary['updated_at'] = self.updated_at.isoformat()
