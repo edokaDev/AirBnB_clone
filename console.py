@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """A cmd-line interpreter to handle creation and deletion of objects."""
 import cmd
 import json

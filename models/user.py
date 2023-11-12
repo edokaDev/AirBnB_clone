@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Used to represent a user."""
 from models.base_model import BaseModel
 

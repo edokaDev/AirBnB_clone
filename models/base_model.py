@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """class BaseModel that defines all common attributes/methods for other classes"""
 from datetime import datetime
 import uuid
@@ -8,7 +9,7 @@ class BaseModel:
     """The parent for all the other subclasses to follow."""
 
     def __init__(self, *args, **kwargs):
-        """Instatiates attributes when an object is made."""
+        """Initializes attributes when an object is made."""
         if kwargs:
             del kwargs['__class__']
             self.__dict__.update(kwargs)

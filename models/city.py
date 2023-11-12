@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Class that defines the city the user is from."""
 from models.base_model import BaseModel
 

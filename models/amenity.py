@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Class to define the amenities."""
 from models.base_model import BaseModel
 

@@ -1,3 +1,4 @@
+#!/usr/bin/python3
 """Class that defines the place by use of various attributes."""
 from models.base_model import BaseModel
 
