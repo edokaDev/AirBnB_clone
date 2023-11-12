@@ -16,20 +16,23 @@ from . import (
 
 class FileStorage:
     """Will be used for storing and retrieving objects.
+
     __objects: is a dictionary of all the created objects
     __file_path: is the path to the json file where the serialized
     dictonary is stored.
     """
+
     __file_path = 'storage_file.json'
     __objects = {}
 
     def all(self):
-        """Returns the dictionary __objects."""
+        """Return the dictionary __objects."""
         return FileStorage.__objects
 
     def new(self, obj):
-        """Sets the key of the obj for the __objects dictionary.
-        The format used is class_name.id
+        """Set the key of the obj for the __objects dictionary.
+
+        The format used is class_name.id.
         """
         class_name = '.'.join((type(obj).__name__, obj.id))
 
@@ -40,8 +43,9 @@ class FileStorage:
         FileStorage.__objects.update({class_name: obj})
 
     def save(self):
-        """Serializes inject to json string and saves them
-        to the __file_path.
+        """Serialize inject to json string.
+
+        and saves them to the __file_path.
         """
         save = {}
         for obj in FileStorage.__objects:
@@ -54,9 +58,7 @@ class FileStorage:
             f.write(json_string)
 
     def reload(self):
-        """Deserializes a json file and stores the dictionary
-        in __objects.
-        """
+        """Deserialize a json file and stores the dict in __objects."""
         # check if the file path exist, else do nothing
         if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r") as file:
