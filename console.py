@@ -14,26 +14,29 @@ import models
 
 class HBNBCommand(cmd.Cmd):
     """All methods and attributes that will be used in the command line."""
+
     prompt = '(hbnb) '
     class_list = ["BaseModel", "User", "Place", "State",
                   "City", "Amenity", "Review"]
 
     def do_quit(self, line):
-        """Exits the command line session."""
+        """Exit the command line session."""
         return True
 
     def do_EOF(self, line):
-        """Exits the command line session."""
+        """Exit the command line session."""
         return True
 
     def emptyline(self):
-        """Does nothing if empty line is parsed."""
+        """Do nothing if empty line is parsed."""
         if self.lastcmd:
             self.lastcmd = ""
             self.onecmd(self.lastcmd)
 
     def do_create(self, line):
-        """Creates an new instance of BaseModel,
+        """Create.
+
+        Create an new instance of BaseModel,
         saves it to a json file and prints id.
         """
         if not line:
@@ -51,7 +54,9 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
 
     def do_show(self, line):
-        """Prints the string representation of an instance
+        """Show.
+
+        Print the string representation of an instance
         based on the class name and id.
         """
         if not line:
@@ -81,7 +86,9 @@ class HBNBCommand(cmd.Cmd):
             print(obj)
 
     def do_destroy(self, line):
-        """Deletes an instance based on the class name
+        """Delete.
+
+        Delete an instance based on the class name
         and id (saves the changes into the JSON file)
         """
         if not line:
@@ -113,7 +120,9 @@ class HBNBCommand(cmd.Cmd):
             models.storage.reload()
 
     def do_all(self, line):
-        """Prints a list of string representations of class instances
+        """All.
+
+        Print a list of string representations of class instances
         based or not based on the name of class
         Usage: all
                all ClassName
@@ -149,7 +158,9 @@ class HBNBCommand(cmd.Cmd):
             print(string_list)
 
     def do_update(self, line):
-        """Updates an existing class instance by adding or
+        """Update.
+
+        Update an existing class instance by adding or
         modifying an attribute.
         Usage: update <class name> <id> <attribute name> "<attribute value>"
         """

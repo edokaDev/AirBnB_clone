@@ -33,7 +33,7 @@ class TestFileStorage(unittest.TestCase):
         storage.new(model)
         storage.save()
 
-        #Create a new storage instance and reload the data
+        # Create a new storage instance and reload the data
         new_storage = FileStorage()
         new_storage.reload()
         all_objects = new_storage.all()

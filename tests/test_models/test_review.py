@@ -47,9 +47,9 @@ class TestReview(unittest.TestCase):
             'id': '12345',
             'created_at': '2023-10-17T12:34:56.789012',
             'updated_at': '2023-10-17T12:34:56.789012',
-            'place_id' : 'Place.12345',
-            'user_id' : 'User.12345',
-            'text' : 'Enjoy your stay'
+            'place_id': 'Place.12345',
+            'user_id': 'User.12345',
+            'text': 'Enjoy your stay'
         }
         review = Review(**review_data)
         self.assertEqual(review.id, '12345')
