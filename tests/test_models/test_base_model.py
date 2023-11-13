@@ -49,12 +49,12 @@ class TestBaseModel(unittest.TestCase):
     def test_save(self):
         "Tests the save method"
         self.obj.name = "Edoka"
-        print(self.obj.created_at)
+        prev_time = self.obj.updated_at
+        print(prev_time)
+        print(prev_time)
         self.obj.save()
-        self.obj.save()
-        self.obj.save()
-        print(self.obj.created_at)
-        self.assertNotEqual(self.obj.updated_at, self.obj.created_at)
+        self.assertNotEqual(self.obj.updated_at, prev_time)
+        self.assertNotEqual(self.obj.created_at, self.obj.updated_at)
         self.assertEqual(self.obj.name, "Edoka")
 
 
