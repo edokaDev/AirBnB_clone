@@ -64,12 +64,12 @@ class FileStorage:
             with open(FileStorage.__file_path, "r") as file:
                 # load the file into a json object
                 objs = dict(json.load(file))
-                """
-                For each object in the loaded dictionary,
-                we will save it into FileStorage.__objects as an
-                instance of its original class with the key
-                remaining the same (i.e. <class_name>.<id>)
-                """
+
+                #For each object in the loaded dictionary,
+                #we will save it into FileStorage.__objects as an
+                #instance of its original class with the key
+                #remaining the same (i.e. <class_name>.<id>)
+
                 for obj in objs:
                     obj_key = obj.split('.')
                     # get the class name
@@ -92,10 +92,10 @@ class FileStorage:
 
                     # create an object of the object's origin class
                     # i.e. (from the class name)
-                    """
-                    here we use global() because we've imported all our classes
-                    so it is now available to us in this namespace
-                    """
+
+                    #here we use global() because we've imported all our classes
+                    #so it is now available to us in this namespace
+
                     instance = globals()[model_class](**instance)
 
                     # save the object to the objects dictionary

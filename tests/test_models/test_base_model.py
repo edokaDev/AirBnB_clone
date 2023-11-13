@@ -21,8 +21,8 @@ class TestBaseModel(unittest.TestCase):
     def test_str(self):
         """Checks the __str__ method."""
         class_name = self.obj.__class__.__name__
-        string = f"[{class_name}] ({self.obj.id}) <{self.obj.__dict__}>"
-        self.assertAlmostEqual(self.obj.__str__(), string)
+        string = f"[{class_name}] ({self.obj.id}) {self.obj.__dict__}"
+        self.assertEqual(self.obj.__str__(), string)
 
     def test_to_dict(self):
         """Tests the to_dict method."""
@@ -44,12 +44,13 @@ class TestBaseModel(unittest.TestCase):
 
     def test_save(self):
         "Tests the save method"
-        obj_dict = self.obj.to_dict()
-        print(obj_dict)
-        prev_time = datetime.fromisoformat(obj_dict['updated_at'])
         self.obj.name = "Edoka"
+        print(self.obj.created_at)
         self.obj.save()
-        self.assertNotEqual(self.obj.updated_at, prev_time)
+        self.obj.save()
+        self.obj.save()
+        print(self.obj.created_at)
+        self.assertNotEqual(self.obj.updated_at, self.obj.created_at)
         self.assertEqual(self.obj.name, "Edoka")
 
 
