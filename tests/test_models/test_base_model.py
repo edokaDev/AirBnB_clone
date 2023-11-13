@@ -41,6 +41,10 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(self.obj.created_at, new_obj.created_at)
         self.assertEqual(self.obj.updated_at, new_obj.updated_at)
         self.assertEqual(self.obj.number, new_obj.number)
+        
+    def test_created_at(self):
+        """Checks if created_at attribute is the right type."""
+        self.assertIsInstance(self.obj.created_at, datetime)
 
     def test_save(self):
         "Tests the save method"
