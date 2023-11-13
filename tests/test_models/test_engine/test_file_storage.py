@@ -2,6 +2,7 @@
 """Test for the FileStorage class."""
 
 import unittest
+import json
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 import os
@@ -16,6 +17,50 @@ class TestFileStorage(unittest.TestCase):
         cls.file_path = "test_file.json"
         if os.path.exists(cls.file_path):
             os.remove(cls.file_path)
+
+    def test_file_storage(self):
+        """Checks if file is name is given."""
+        storage = FileStorage()
+        storage.save()
+
+    def test_all(self):
+        """Checks if the all() returns an empty dictionar."""
+        storage = FileStorage()
+        dictionary = storage.all()
+        self.assertNotEqual(dictionary, {})
+
+    def test_new(self):
+        """Checks if new() does its job."""
+        obj = BaseModel()
+        storage = FileStorage()
+        storage.new(obj)
+        dictionary = storage.all()
+        self.assertNotEqual(dictionary, {})
+
+    def test_save(self):
+        """Checks if save() does its job."""
+        storage = FileStorage()
+        obj = BaseModel()
+        obj.save()
+
+        with open('storage_file.json', 'r', encoding='utf') as f:
+            dictionary = json.load(f)
+
+        key = '.'.join((obj.__class__.__name__, obj.id))
+        if key not in dictionary.keys():
+            raise KeyError
+
+    def test_reload(self):
+        """Checks if reload() does its job."""
+        storage = FileStorage()
+        obj = BaseModel()
+        obj.save()
+        storage.reload()
+        dictionary = storage.all()
+        key = '.'.join((obj.__class__.__name__, obj.id))
+
+        if key not in dictionary:
+            raise KeyError
 
     def test_file_storage_new_and_all(self):
         """Test the new and all methods of FileStorage."""
