@@ -1,11 +1,12 @@
 #!/usr/bin/python3
 """Test for the FileStorage class."""
 
-import os
 import unittest
 import json
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
+import os
+
 
 class TestFileStorage(unittest.TestCase):
     """Test for the FileStorage Class."""
@@ -20,15 +21,11 @@ class TestFileStorage(unittest.TestCase):
     def test_file_storage(self):
         """Checks if file is name is given."""
         storage = FileStorage()
-        try:
-            storage.reload()
-        except Exception as e:
-            raise FileNotFoundError
+        storage.save()
 
     def test_all(self):
-        """Checks if the all() returns an empty dictionary."""
+        """Checks if the all() returns an empty dictionar."""
         storage = FileStorage()
-        storage.reload()
         dictionary = storage.all()
         self.assertNotEqual(dictionary, {})
 

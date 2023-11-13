@@ -2,6 +2,7 @@
 """Serializes and deserializes instances to and from a JSON file."""
 from datetime import datetime
 import json
+import os
 from . import (
     BaseModel,
     User,
@@ -59,9 +60,7 @@ class FileStorage:
     def reload(self):
         """Deserialize a json file and stores the dict in __objects."""
         # check if the file path exist, else do nothing
-        # used exception instead of using 0s.path
-        # if os.path.exists(FileStorage.__file_path):
-        try:
+        if os.path.exists(FileStorage.__file_path):
             with open(FileStorage.__file_path, "r") as file:
                 # load the file into a json object
                 objs = dict(json.load(file))
@@ -87,5 +86,3 @@ class FileStorage:
                     )
                     instance = globals()[model_class](**instance)
                     FileStorage.__objects[obj] = instance
-        except Exception:
-            pass
