@@ -222,8 +222,9 @@ class HBNBCommand(cmd.Cmd):
 
     def default(self, line):
         """Do default.
-        
-        This method is called when theres a call command that is not  implemented.
+
+        This method is called when theres a call command
+        that is not  implemented.
         """
         parts = line.split('.')
 
@@ -262,10 +263,9 @@ class HBNBCommand(cmd.Cmd):
                 # all()
                 print(all_list)
                 return
-            
+
             elif 'show' in command or 'destroy' in command:
-                pattern = r'[a-z]+\("([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-' \
-                    r'[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})"\)'
+                pattern = r'[a-z]+\("([^"]+)"\)'
                 match = re.match(pattern, command)
                 if match:
                     id = match.group(1)
@@ -273,9 +273,10 @@ class HBNBCommand(cmd.Cmd):
                     if 'show' in command:
                         return self.do_show(line)
                     return self.do_destroy(line)
-            
+
             elif 'update' in command:
-                pattern = r'update\("([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})",\s*"([^"]+)",\s*("[^"]+"|\d+|\S+@\S+\.\S+)\)'
+                pattern = r'update\("([^"]+)",\s*"([^"]+)",' \
+                    r'\s*("[^"]+"|\d+|\S+@\S+\.\S+)\)'
                 match = re.match(pattern, command)
                 if match:
                     id = match.group(1)
@@ -284,7 +285,7 @@ class HBNBCommand(cmd.Cmd):
 
                     line = f'{class_name} {id} {atrr} {value}'
                     return self.do_update(line)
-                
+
         print("Invalid command:", line)
 
 
