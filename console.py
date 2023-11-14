@@ -3,6 +3,7 @@
 import cmd
 import json
 from models.base_model import BaseModel
+from models.engine.file_storage import FileStorage
 from models.user import User
 from models.place import Place
 from models.city import City
@@ -10,6 +11,7 @@ from models.amenity import Amenity
 from models.review import Review
 from models.state import State
 import models
+from utils.class_filter import class_filter
 
 
 class HBNBCommand(cmd.Cmd):
@@ -217,6 +219,40 @@ class HBNBCommand(cmd.Cmd):
             f.write(new_copy)
         models.storage.reload()
         obj_spawn.save()
+
+    def default(self, line):
+        """Do default.
+        
+        This method is called when theres a call command that is not  implemented.
+        """
+        parts = line.split('.')
+
+        if len(parts) == 2:
+            if parts[0] not in HBNBCommand.class_list:
+                print("** class doesn't exist **")
+                return
+            if parts[1] == 'all()' or parts[1] == 'count()':
+                class_name = parts[0]
+                json_models = FileStorage()
+                json_models.reload()
+                obj_dict = json_models.all()
+
+                filtered_dict = class_filter(obj_dict, class_name)
+                all_list = []
+                inst = None
+                for ob in filtered_dict:
+                    inst = globals()[class_name](**(
+                            filtered_dict[ob].to_dict()
+                            ))
+                    all_list.append(inst.__str__())
+                if parts[1] == 'count()':
+                    print(len(all_list))
+                    return
+                # all()
+                print(all_list)
+
+        else:
+            print("Invalid command:", line)
 
 
 if __name__ == "__main__":
