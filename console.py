@@ -2,6 +2,7 @@
 """A cmd-line interpreter to handle creation and deletion of objects."""
 import cmd
 import json
+import re
 from models.base_model import BaseModel
 from models.engine.file_storage import FileStorage
 from models.user import User
@@ -66,7 +67,6 @@ class HBNBCommand(cmd.Cmd):
             return
 
         args = line.split()
-
         if args[0] not in HBNBCommand.class_list:
             print("** class doesn't exist **")
             return
@@ -227,12 +227,23 @@ class HBNBCommand(cmd.Cmd):
         """
         parts = line.split('.')
 
-        if len(parts) == 2:
+        if len(parts) >= 2:
+            class_name = parts[0]
+            command = ''
+            # taking into account that the command can contain
+            # more than 1 `.`
+            if len(parts) > 2:
+                for i in range(1, len(parts)):
+                    if i != 1:
+                        command += '.'
+                    command += parts[i]
+            else:
+                command = parts[1]
+
             if parts[0] not in HBNBCommand.class_list:
                 print("** class doesn't exist **")
                 return
-            if parts[1] == 'all()' or parts[1] == 'count()':
-                class_name = parts[0]
+            if command == 'all()' or command == 'count()':
                 json_models = FileStorage()
                 json_models.reload()
                 obj_dict = json_models.all()
@@ -245,14 +256,36 @@ class HBNBCommand(cmd.Cmd):
                             filtered_dict[ob].to_dict()
                             ))
                     all_list.append(inst.__str__())
-                if parts[1] == 'count()':
+                if command == 'count()':
                     print(len(all_list))
                     return
                 # all()
                 print(all_list)
+                return
+            
+            elif 'show' in command or 'destroy' in command:
+                pattern = r'[a-z]+\("([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-' \
+                    r'[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})"\)'
+                match = re.match(pattern, command)
+                if match:
+                    id = match.group(1)
+                    line = f'{class_name} {id}'
+                    if 'show' in command:
+                        return self.do_show(line)
+                    return self.do_destroy(line)
+            
+            elif 'update' in command:
+                pattern = r'update\("([a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12})",\s*"([^"]+)",\s*("[^"]+"|\d+|\S+@\S+\.\S+)\)'
+                match = re.match(pattern, command)
+                if match:
+                    id = match.group(1)
+                    atrr = match.group(2)
+                    value = match.group(3)
 
-        else:
-            print("Invalid command:", line)
+                    line = f'{class_name} {id} {atrr} {value}'
+                    return self.do_update(line)
+                
+        print("Invalid command:", line)
 
 
 if __name__ == "__main__":
