@@ -1,0 +1,132 @@
+.filters {
+    height: 70px;
+    width: 100%;
+    border: 1px solid #DDDDDD;
+    border-radius: 4px;
+    margin-bottom: 30px;
+}
+
+.filters .sub_filters {
+    height: 100%;
+    display: flex;
+}
+
+.filters .locations, .filters .amenities {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.filters .locations {
+    border-right: 1px solid #DDDDDD;
+}
+
+.filters .locations h3, .filters .amenities h3 {
+    font-weight: 600;
+}
+
+.filters .locations h4, .filters .amenities h4 {
+    font-weight: 400;
+    font-size: 14px;
+}
+
+.filters .popover {
+    display: none;
+    position: absolute;
+    background-color: #FAFAFA;
+    border-radius: 4px;
+    border: 1px solid #DDDDDD;
+    padding:30px 25px;
+}
+
+.filters .locations:hover .popover,
+.filters .amenities:hover .popover  {
+    display: block;
+}
+
+.filters .popover h2 {
+    font-size: 16px;
+}
+
+.filters .popover ul {
+    margin-bottom: 20px;
+}
+
+.filters .popover li {
+    display: block;
+    margin-left: 20px;
+}
+
+/* Small Screens */
+@media (max-width: 599px) {
+    .filters {
+        height: 140px;
+        width: 100%;
+        border: 1px solid #DDDDDD;
+        border-radius: 4px;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+        align-items: center;
+        justify-content: center;
+    }
+    .filters .sub_filters {
+        width: 100%;
+    
+    }
+    .filters button {
+        font-size: 18px;
+        background-color: #FF5A5F;
+        color: #FFFFFF;
+        height: 48px;
+        width: 90%;
+        margin-bottom: 20px;
+        padding: 10px;
+        border-radius: 4px;
+        border: 0;
+    }
+    .filters .locations, .filters .amenities {
+        width: 50%;
+        text-align: center;
+    }
+    .filters .popover {
+        top: 172px;
+        text-align: left;
+        width: 30%;
+    }
+}
+
+/* Large Screens */
+@media (min-width: 600px){
+    .filters {
+        display: flex;
+    }
+    .filters .sub_filters {
+        width: 80%;
+    }
+    .filters button {
+        font-size: 18px;
+        background-color: #FF5A5F;
+        color: #FFFFFF;
+        height: 48px;
+        width: 20%;
+        border-radius: 4px;
+        border: 0;
+        margin-left: 30%;
+        margin-right: 30px;
+        float: right;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+    .filters .locations, .filters .amenities {
+        margin-left: 50px;
+        width: 40%;
+    }
+    .filters .popover {
+        top: 172px;
+        margin-left: -50px;
+        width: 200px;
+    }        
+}
+
