@@ -6,6 +6,6 @@ header {
     display: flex;
 }
 
-header img {
+header svg {
     margin-left: 20px;
 }

@@ -61,10 +61,15 @@
     margin-bottom: 20px;
 }
 
+
 .information .icons {
     width: 100px;;
 }
 
 .user p {
     margin-bottom: 10px;
+}
+.information .icons svg {
+    width: 50px;
+    height: 50px;
 }
