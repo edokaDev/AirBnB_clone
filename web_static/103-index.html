@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>12. Accessibility</title>
+    <link rel="stylesheet" href="styles/103-common.css">
+    <link rel="stylesheet" href="styles/103-header.css">
+    <link rel="stylesheet" href="styles/103-footer.css">
+    <link rel="stylesheet" href="styles/103-filters.css">
+    <link rel="stylesheet" href="styles/103-places.css">
+</head>
+<body>
+    <header aria-label="Nav bar">
+        <svg aria-label="AirBnB Logo">
+            <image href="images/logo.png">
+            </image>
+        </svg>
+    </header>
+    <div class="container">
+        <section class="filters" aria-label="Filters">
+            <div class="sub_filters">
+                <div class="locations">
+                    <h3>States</h3>
+                    <h4>California, Arizona...</h4>
+                    <div class="popover">
+                        <h2>Arizona:</h2>
+                        <ul aria-label="State sub list">
+                            <li>Page</li>
+                            <li>Page 2</li>
+                        </ul>
+                        <h2>California:</h2>
+                        <ul aria-label="State sub list">
+                            <li>San Francisco</li>
+                            <li>Los Angeles</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="amenities">
+                    <h3>Amenities</h3>
+                    <h4>Internet, Kitchen...</h4>
+                    <div class="popover">
+                        <ul aria-label="Amenities list">
+                            <li>Internet</li>
+                            <li>TV</li>
+                            <li>Kitchen</li>
+                            <li>Iron</li>
+                        </ul>
+                    </div>
+
+                </div>
+
+            </div>
+            <button type="submit">Search</button>
+        </section>
+        <section class="places" aria-label="Search results">
+            <h1>Places</h1>
+            <div class="places_articles">
+                <article aria-label="Search result item">
+                    <div class="header">
+                        <h2>My home</h2>
+                        <div aria-label="Price box" class="price_by_night">
+                            <p aria-label="Price">$80</p>
+                        </div>
+                    </div>
+                    <div class="information" aria-label="Info icons">
+                        <div class="icons max_guest" aria-label="Icon item">
+                            <svg aria-label="Guests icon">
+                                <image href="images/icon_group.png" />
+                            </svg>
+                            <p aria-label="Icon description">2 Guests</p>
+                        </div>
+                        <div class="icons number_rooms" aria-label="Icon item">
+                            <svg aria-label="Bedroom icon">
+                                <image href="images/icon_bed.png" />
+                            </svg>
+                            <p aria-label="Icon description">1 Bedroom</p>
+                        </div>
+                        <div class="icons number_bathrooms" aria-label="Icon item">
+                            <svg aria-label="Bathroon icon">
+                                <image href="images/icon_bath.png" />
+                            </svg>
+                            <p aria-label="Icon description">1 Bathroom</p>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <p aria-label="Owner"><b>Owner</b> John Lennon</p>
+                        <p aria-label="Owner description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, cumque ducimus. Labore incidunt ducimus officia, recusandae ratione saepe dolor blanditiis hic odit. Tempore, expedita voluptatibus. Aliquid, ea? Eos, tempore vero!</p>
+                    </div>
+                    <div class="amenities" aria-label="Amenities">
+                        <h2>Amenities</h2>
+                        <ul aria-label="Amenities list">
+                            <li class="amenities_icon">
+                                <svg aria-label="TV icon">
+                                    <image href="images/icon_tv.png" />
+                                </svg>
+                                <p>Tv</p>
+                            </li>
+                            <li class="amenities_icon">
+                                <svg aria-label="Pet icon">
+                                    <image href="images/icon_pets.png" />
+                                </svg>
+                                <p>Pets friendly</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="reviews">
+                        <h2>Reviews</h2>
+                        <ul aria-label="Reviews list">
+                            <li class="amenities_review">
+                                <h3>From Bob Dylan the 27th January 2017</h3>
+                                <p>Runshi is an epic host. Nothing more I can say. 5 start!</p>
+                            </li>
+                            <li class="amenities_review">
+                                <h3>From Connor the 4th January 2017</h3>
+                                <p>Highly recommended!</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+                <article aria-label="Search result item">
+                    <div class="header">
+                        <h2>Tiny house</h2>
+                        <div aria-label="Price box" class="price_by_night">
+                            <p aria-label="Price">$65</p>
+                        </div>
+                    </div>
+                    <div class="information" aria-label="Info icons">
+                        <div class="icons max_guest" aria-label="Icon item">
+                            <svg aria-label="Guests icon">
+                                <image href="images/icon_group.png" />
+                            </svg>
+                            <p aria-label="Icon description">4 Guests</p>
+                        </div>
+                        <div class="icons number_rooms" aria-label="Icon item">
+                            <svg aria-label="Bedroom icon">
+                                <image href="images/icon_bed.png" />
+                            </svg>
+                            <p aria-label="Icon description">2 Bedroom</p>
+                        </div>
+                        <div class="icons number_bathrooms" aria-label="Icon item">
+                            <svg aria-label="Bathroon icon">
+                                <image href="images/icon_bath.png" />
+                            </svg>
+                            <p aria-label="Icon description">1 Bathroom</p>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <p aria-label="Owner"><b>Owner</b> Peter Edoka</p>
+                        <p aria-label="Owner description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, cumque ducimus. Labore incidunt ducimus officia, recusandae ratione saepe dolor blanditiis hic odit. Tempore, expedita voluptatibus. Aliquid, ea? Eos, tempore vero! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Similique, architecto aliquam possimus ad quaerat eius amet quis, tenetur nisi minima saepe? Libero sint, dolor reprehenderit voluptatibus labore aperiam nobis fuga!</p>
+                    </div>
+                    <div class="amenities" aria-label="Amenities">
+                        <h2>Amenities</h2>
+                        <ul aria-label="Amenities list">
+                            <li class="amenities_icon">
+                                <svg aria-label="Pet icon">
+                                    <image href="images/icon_pets.png" />
+                                </svg>
+                                <p>Pets friendly</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="reviews">
+                        <h2>Reviews</h2>
+                        <ul aria-label="Reviews list">
+                            <li class="amenities_review">
+                                <h3>From Bob Dylan the 27th January 2017</h3>
+                                <p>Runshi is an epic host. Nothing more I can say. 5 start!</p>
+                            </li>
+                            <li class="amenities_review">
+                                <h3>From Connor the 4th January 2017</h3>
+                                <p>Highly recommended!</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+                <article aria-label="Search result item">
+                    <div class="header">
+                        <h2>A suite</h2>
+                        <div aria-label="Price box" class="price_by_night">
+                            <p aria-label="Price">$190</p>
+                        </div>
+                    </div>
+                    <div class="information" aria-label="Info icons">
+                        <div class="icons max_guest" aria-label="Icon item">
+                            <svg aria-label="Guests icon">
+                                <image href="images/icon_group.png" />
+                            </svg>
+                            <p aria-label="Icon description">6 Guests</p>
+                        </div>
+                        <div class="icons number_rooms" aria-label="Icon item">
+                            <svg aria-label="Bedroom icon">
+                                <image href="images/icon_bed.png" />
+                            </svg>
+                            <p aria-label="Icon description">3 Bedroom</p>
+                        </div>
+                        <div class="icons number_bathrooms" aria-label="Icon item">
+                            <svg aria-label="Bathroon icon">
+                                <image href="images/icon_bath.png" />
+                            </svg>
+                            <p aria-label="Icon description">3 Bathroom</p>
+                        </div>
+                    </div>
+                    <div class="user">
+                        <p aria-label="Owner"><b>Owner</b> Daniel Augustine</p>
+                        <p aria-label="Owner description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, cumque ducimus. Labore incidunt ducimus officia, recusandae ratione saepe dolor blanditiis hic odit. Tempore, expedita voluptatibus. Aliquid, ea? Eos, tempore vero!
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Assumenda delectus iure, quos unde quidem deleniti laudantium eaque, eligendi excepturi consectetur enim incidunt, dolor quis. Eum, consectetur commodi. Dolores, hic ad.
+                        </p>
+                    </div>
+                    <div class="amenities" aria-label="Amenities">
+                        <h2>Amenities</h2>
+                        <ul aria-label="Amenities list">
+                            <li class="amenities_icon">
+                                <svg aria-label="TV icon">
+                                    <image href="images/icon_tv.png" />
+                                </svg>
+                                <p>Tv</p>
+                            </li>
+                            <li class="amenities_icon">
+                                <svg aria-label="Wifi icon">
+                                    <image href="images/icon_wifi.png" />
+                                </svg>
+                                <p>Wifi</p>
+                            </li>
+                            <li class="amenities_icon">
+                                <svg aria-label="Pet icon">
+                                    <image href="images/icon_pets.png" />
+                                </svg>
+                                <p>Pets friendly</p>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="reviews">
+                        <h2>Reviews</h2>
+                        <ul aria-label="Reviews list">
+                            <li class="amenities_review">
+                                <h3>From Bob Dylan the 27th January 2017</h3>
+                                <p>Runshi is an epic host. Nothing more I can say. 5 start!</p>
+                            </li>
+                            <li class="amenities_review">
+                                <h3>From Connor the 4th January 2017</h3>
+                                <p>Highly recommended!</p>
+                            </li>
+                        </ul>
+                    </div>
+                </article>
+            </div>
+        </section>
+    </div>
+    <footer aria-label="Footer">Best School</footer>
+</body>
+</html>
